@@ -1,4 +1,4 @@
-package main
+package controllers
 
 import "fmt"
 
@@ -6,8 +6,8 @@ import "rsc.io/quote"
 
 var yolo = "Lorem Ipsum"
 
-func Demo() {
-	// Basic Output
+func Demo() string {
+	/*// Basic Output
 	fmt.Println("Hell-O")
 	fmt.Printf("%s!\n\n", yolo)
 
@@ -54,7 +54,7 @@ func Demo() {
 	        fmt.Println("not bad")
 	        fmt.Println("you need to learn more")
 	    }
-	}
+	}*/
 
-	fmt.Println(quote.Go())
+	return fmt.Sprintf(quote.Go())
 }

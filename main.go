@@ -1,48 +1,11 @@
 package main
 
-import "fmt"
+import _ "fmt"
 
-import models "bagogo/models"
+import "bagogo/routes"
 
 func main() {
-	sqlQuery()
-}
-
-func sqlQuery() {
-    db, err := models.Connect()
-    if err != nil {
-        fmt.Println(err.Error())
-        return
-    }
-    defer db.Close()
-
-    rows, err := db.Query("select id, name, email from users limit 2")
-    if err != nil {
-        fmt.Println(err.Error())
-        return
-    }
-    defer rows.Close()
-
-    var result []models.User
-
-    for rows.Next() {
-        var each = models.User{}
-        var err = rows.Scan(&each.Id, &each.Name, &each.Email)
-
-        if err != nil {
-            fmt.Println(err.Error())
-            return
-        }
-
-        result = append(result, each)
-    }
-
-    if err = rows.Err(); err != nil {
-        fmt.Println(err.Error())
-        return
-    }
-
-    for _, each := range result {
-        fmt.Println(each.Name)
-    }
+	r := routes.SetupRoutes()
+    r.Run("localhost:8080")
+	// fmt.Println("lorem")
 }
