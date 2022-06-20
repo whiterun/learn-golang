@@ -1,13 +1,14 @@
 package controllers
 
 import (
-	"log"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"rsc.io/quote"
+	"bagogo/helpers"
 	"bagogo/models"
 )
 
+var logger = helpers.LogInstance()
 var yolo = "Lorem Ipsum"
 
 func Demo() string {
@@ -70,7 +71,6 @@ func GetUser(c *gin.Context) {
 	row, err := models.DB.Query("SELECT id, name, email FROM users where id = ?", id)
 
 	if row.Next() {
-		log.Println(row.Columns())
 		row.Scan(&user.Id, &user.Name, &user.Email)
 		if err != nil {
 			c.AbortWithStatus(404)
