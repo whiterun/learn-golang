@@ -1,15 +1,18 @@
 package models
 
 import (
+    "fmt"
 	"database/sql"
     _ "github.com/go-sql-driver/mysql"
 )
 
-func Connect() (*sql.DB, error) {
-    db, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/ali_cm")
+var DB *sql.DB
+
+func Connect() {
+    database, err := sql.Open("mysql", "root:@tcp(127.0.0.1:3306)/ali_cm")
     if err != nil {
-        return nil, err
+        fmt.Println("Err", err.Error())
     }
 
-    return db, nil
+    DB = database
 }

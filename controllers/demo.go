@@ -1,8 +1,12 @@
 package controllers
 
-import "fmt"
-
-import "rsc.io/quote"
+import (
+	"log"
+	"fmt"
+	"github.com/gin-gonic/gin"
+	"rsc.io/quote"
+	"bagogo/models"
+)
 
 var yolo = "Lorem Ipsum"
 
@@ -57,4 +61,24 @@ func Demo() string {
 	}*/
 
 	return fmt.Sprintf(quote.Go())
+}
+
+func GetUser(c *gin.Context) {
+	id := c.Param("id")
+	user := models.User{}
+
+	row, err := models.DB.Query("SELECT id, name, email FROM users where id = ?", id)
+
+	if row.Next() {
+		log.Println(row.Columns())
+		row.Scan(&user.Id, &user.Name, &user.Email)
+		if err != nil {
+			c.AbortWithStatus(404)
+		}
+		
+	    c.JSON(200, gin.H{"data": user})
+	} else {
+		c.AbortWithStatus(404)
+	}
+
 }

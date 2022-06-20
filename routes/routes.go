@@ -1,17 +1,17 @@
 package routes
 
-import "bagogo/controllers"
-
-import "github.com/gin-gonic/gin"
+import (
+	"bagogo/controllers"
+	"github.com/gin-gonic/gin"
+	"bagogo/models"
+)
 
 func SetupRoutes() *gin.Engine {
     r := gin.Default()
+
+    models.Connect()
     
-    r.GET("/", func(c *gin.Context) {
-		c.JSON(200, gin.H{
-			"message": controllers.Demo(),
-		})
-	})
+    r.GET("/user/:id", controllers.GetUser)
 
     return r
 }

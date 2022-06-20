@@ -2,10 +2,14 @@ package main
 
 import _ "fmt"
 
-import "bagogo/routes"
+import (
+	"log"
+	"bagogo/routes"
+)
 
 func main() {
 	r := routes.SetupRoutes()
-    r.Run("localhost:8080")
+
+    log.Fatal(r.Run("localhost:3000"))
 	// fmt.Println("lorem")
 }
