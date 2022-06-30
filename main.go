@@ -1,15 +1,24 @@
 package main
 
-import _ "fmt"
-
 import (
-	"log"
-	"bagogo/routes"
+	"flag"
+	"bagogo/modules/api"
+	"bagogo/modules/util/config"
 )
 
 func main() {
-	r := routes.SetupRoutes()
+	// Load environment configuration from file
+	cfgPath := flag.String("p", "./config.local.yaml", "Path to config file")
+	flag.Parse()
 
-    log.Fatal(r.Run("localhost:3000"))
-	// fmt.Println("lorem")
+	cfg, err := config.Load(*cfgPath)
+	checkErr(err)
+
+	checkErr(api.Start(cfg))
+}
+
+func checkErr(err error) {
+	if err != nil {
+		panic(err.Error())
+	}
 }
