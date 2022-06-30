@@ -2,16 +2,18 @@ package routes
 
 import (
 	"bagogo/controllers"
-	"github.com/gin-gonic/gin"
 	"bagogo/models"
+    "bagogo/modules/util/config"
+	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes() *gin.Engine {
+func SetupRoutes(cfg *config.Configuration) *gin.Engine {
     r := gin.Default()
 
-    models.Connect()
+    models.Connect(cfg)
     
-    r.GET("/user/:id", controllers.GetUser)
+    api := r.Group("/api")
+    api.GET("/user/:id", controllers.GetUser)
 
     return r
 }

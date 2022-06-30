@@ -7,7 +7,7 @@ import (
 )
 
 func Start(cfg *config.Configuration) error {
-	r := routes.SetupRoutes()
+	r := routes.SetupRoutes(cfg)
 
     log.Fatal(r.Run("localhost:3000"))
 	

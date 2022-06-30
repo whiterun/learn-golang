@@ -1,4 +1,9 @@
 database:
+  host: 127.0.0.1
+  port: :3306
+  database: ali_cm
+  username: root
+  password: 
   log_queries: true
   timeout_seconds: 5
 

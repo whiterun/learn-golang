@@ -27,6 +27,11 @@ type Configuration struct {
 
 // Database holds data necessary for database configuration
 type Database struct {
+	Host string `yaml:"host,omitempty"`
+	Port string `yaml:"port,omitempty"`
+	Database string `yaml:"database,omitempty"`
+	Username string `yaml:"username,omitempty"`
+	Password string `yaml:"password,omitempty"`
 	LogQueries bool `yaml:"log_queries,omitempty"`
 	Timeout    int  `yaml:"timeout_seconds,omitempty"`
 }
