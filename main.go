@@ -8,7 +8,7 @@ import (
 
 func main() {
 	// Load environment configuration from file
-	cfgPath := flag.String("p", "./config.local.yaml", "Path to config file")
+	cfgPath := flag.String("p", "./config.yaml", "Path to config file")
 	flag.Parse()
 
 	cfg, err := config.Load(*cfgPath)
