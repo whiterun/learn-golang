@@ -7,13 +7,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(cfg *config.Configuration) *gin.Engine {
-    r := gin.Default()
-
+func SetupRoutes(e *gin.Engine, cfg *config.Configuration) {
     models.Connect(cfg)
     
-    api := r.Group("/api")
+    api := e.Group("/api")
     api.GET("/user/:id", controllers.GetUser)
-
-    return r
 }

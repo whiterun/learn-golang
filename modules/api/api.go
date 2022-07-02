@@ -1,15 +1,20 @@
 package api
 
 import (
-	"log"
 	"bagogo/modules/util/config"
+	"bagogo/modules/util/server"
 	"bagogo/routes"
 )
 
 func Start(cfg *config.Configuration) error {
-	r := routes.SetupRoutes(cfg)
+	e := server.New()
+	routes.SetupRoutes(e, cfg)
 
-    log.Fatal(r.Run("localhost:3000"))
-	
+	server.Start(e, &server.Config{
+		Port: cfg.Server.Port,
+		ReadTimeoutSeconds: cfg.Server.ReadTimeout,
+		WriteTimeoutSeconds: cfg.Server.WriteTimeout,
+	})
+
 	return nil
 }
