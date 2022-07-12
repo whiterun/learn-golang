@@ -4,6 +4,7 @@ import (
 	"flag"
 	"bagogo/modules/api"
 	"bagogo/modules/util/config"
+	"github.com/gin-gonic/gin"
 )
 
 func main() {
@@ -13,6 +14,9 @@ func main() {
 
 	cfg, err := config.Load(*cfgPath)
 	checkErr(err)
+
+	// Set environment mode
+	gin.SetMode(cfg.Server.Mode)
 
 	checkErr(api.Start(cfg))
 }

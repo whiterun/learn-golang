@@ -11,5 +11,5 @@ func SetupRoutes(e *gin.Engine, cfg *config.Configuration) {
     models.Connect(cfg)
     
     api := e.Group("/api")
-    api.GET("/user/:id", controllers.GetUser)
+    api.GET("/users/:id", controllers.GetUser)
 }

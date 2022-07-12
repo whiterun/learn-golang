@@ -28,10 +28,10 @@ func healthCheck(c *gin.Context) {
 
 // Config represents server specific config
 type Config struct {
+	Mode string
 	Port string
 	ReadTimeoutSeconds int
 	WriteTimeoutSeconds int
-	Debug bool
 }
 
 // Start starts gin server

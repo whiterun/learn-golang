@@ -8,7 +8,7 @@ database:
   timeout_seconds: 5
 
 server:
+  mode: debug
   port: localhost:3000
-  debug: true
   read_timeout_seconds: 10
   write_timeout_seconds: 5
