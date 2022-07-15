@@ -1,24 +1,22 @@
-package models
+package database
 
 import (
-    "fmt"
-
     "bagogo/helpers"
     "bagogo/modules/util/config"
-	"database/sql"
+    _ "database/sql"
     _ "github.com/go-sql-driver/mysql"
+    "github.com/jmoiron/sqlx"
 )
 
-var DB *sql.DB
 var logger = helpers.LogInstance()
 
-func Connect(cfg *config.Configuration) {
+func Connect(cfg *config.Configuration) (*sqlx.DB, error) {
     dsn := cfg.DB.Username+":"+cfg.DB.Password+"@tcp("+cfg.DB.Host+cfg.DB.Port+")/"+cfg.DB.Database
 
-    database, err := sql.Open("mysql", dsn)
+    db, err := sqlx.Open("mysql", dsn)
     if err != nil {
-        fmt.Println("Err", err.Error())
+        logger.Println(err.Error())
     }
 
-    DB = database
+    return db, nil
 }

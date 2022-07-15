@@ -1,15 +1,25 @@
 package routes
 
 import (
-	"bagogo/controllers"
-	"bagogo/models"
+	// "bagogo/controllers"
     "bagogo/modules/util/config"
+	"bagogo/modules/util/database"
+
+    "bagogo/modules/api/user"
+    ut "bagogo/modules/api/user/transport"
+
 	"github.com/gin-gonic/gin"
 )
 
-func SetupRoutes(e *gin.Engine, cfg *config.Configuration) {
-    models.Connect(cfg)
+func SetupRoutes(e *gin.Engine, cfg *config.Configuration) error {
+    db, err := database.Connect(cfg)
+
+    if err != nil {
+        return err
+    }
     
     api := e.Group("/api")
-    api.GET("/users/:id", controllers.GetUser)
+    ut.NewHTTP(user.Initialize(db), api)
+
+    return nil
 }
